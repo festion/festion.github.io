@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Assistant Deployment Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Home Assistant Deployment Dashboard</h1>
+            <p class="subtitle">Monitoring configuration deployments and system health</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Deployments</h3>
+                <p class="stat-value" id="totalDeployments">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Success Rate</h3>
+                <p class="stat-value" id="successRate">0%</p>
+            </div>
+            <div class="stat-card">
+                <h3>Last Deployment</h3>
+                <p class="stat-value" id="lastDeployment">Never</p>
+            </div>
+            <div class="stat-card">
+                <h3>Active Deployers</h3>
+                <p class="stat-value" id="activeDeployers">0</p>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>Deployment Trend (Last 30 Days)</h3>
+                <canvas id="deploymentTrendChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Status Distribution</h3>
+                <canvas id="statusDistributionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="deployments-table">
+            <h3>Recent Deployments</h3>
+            <table id="deploymentsTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Commit</th>
+                        <th>User</th>
+                        <th>Workflow</th>
+                    </tr>
+                </thead>
+                <tbody id="deploymentsTableBody">
+                    <tr>
+                        <td colspan="5" class="loading">Loading deployment data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>Dashboard auto-refreshes every 5 minutes | Last updated: <span id="lastUpdated">Never</span></p>
+    </footer>
+
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
