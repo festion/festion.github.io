@@ -1,0 +1,14 @@
+{
+  "deployments": [
+    {
+      "run_id": "example-run-1",
+      "timestamp": "2025-07-14T18:30:00Z",
+      "status": "success",
+      "commit": "e8b2707023896206561220af91821ed1533c89c2",
+      "user": "festion",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/example-run-1",
+      "message": "Fix appliance notification duplicates"
+    }
+  ],
+  "last_updated": "2025-07-14T18:30:00Z"
+}
