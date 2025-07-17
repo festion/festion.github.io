@@ -175,19 +175,19 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Deployments</h3>
-                <p class="stat-value" id="totalDeployments">0</p>
+                <p class="stat-value" id="totalDeployments">7</p>
             </div>
             <div class="stat-card">
                 <h3>Success Rate</h3>
-                <p class="stat-value" id="successRate">0%</p>
+                <p class="stat-value" id="successRate">86%</p>
             </div>
             <div class="stat-card">
                 <h3>Last Deployment</h3>
-                <p class="stat-value" id="lastDeployment">Never</p>
+                <p class="stat-value" id="lastDeployment">NaN day ago</p>
             </div>
             <div class="stat-card">
                 <h3>Active Deployers</h3>
-                <p class="stat-value" id="activeDeployers">0</p>
+                <p class="stat-value" id="activeDeployers">1</p>
             </div>
         </div>
 
@@ -205,7 +205,53 @@
                 </thead>
                 <tbody id="deploymentsTableBody">
                     <tr>
-                        <td colspan="5" class="loading">Loading deployment data...</td>
+                        <td>Invalid Date Invalid Date</td>
+                        <td><span class="status-badge status-success">success</span></td>
+                        <td><code class="commit-hash">8c032e2</code></td>
+                        <td>festion</td>
+                        <td><a href="https://github.com/festion/home-assistant-config/actions/runs/16348166493" class="workflow-link" target="_blank">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Date Invalid Date</td>
+                        <td><span class="status-badge status-failure">failure</span></td>
+                        <td><code class="commit-hash">8c032e2</code></td>
+                        <td>festion</td>
+                        <td><a href="https://github.com/festion/home-assistant-config/actions/runs/16348136523" class="workflow-link" target="_blank">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Date Invalid Date</td>
+                        <td><span class="status-badge status-success">success</span></td>
+                        <td><code class="commit-hash">8c032e2</code></td>
+                        <td>festion</td>
+                        <td><a href="https://github.com/festion/home-assistant-config/actions/runs/16348099336" class="workflow-link" target="_blank">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Date Invalid Date</td>
+                        <td><span class="status-badge status-success">success</span></td>
+                        <td><code class="commit-hash">7d1870f</code></td>
+                        <td>festion</td>
+                        <td><a href="https://github.com/festion/home-assistant-config/actions/runs/16347926280" class="workflow-link" target="_blank">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Date Invalid Date</td>
+                        <td><span class="status-badge status-success">success</span></td>
+                        <td><code class="commit-hash">7d1870f</code></td>
+                        <td>festion</td>
+                        <td><a href="https://github.com/festion/home-assistant-config/actions/runs/16347915030" class="workflow-link" target="_blank">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Date Invalid Date</td>
+                        <td><span class="status-badge status-success">success</span></td>
+                        <td><code class="commit-hash">7d1870f</code></td>
+                        <td>festion</td>
+                        <td><a href="https://github.com/festion/home-assistant-config/actions/runs/16347890198" class="workflow-link" target="_blank">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Date Invalid Date</td>
+                        <td><span class="status-badge status-success">success</span></td>
+                        <td><code class="commit-hash">bf6c60b</code></td>
+                        <td>festion</td>
+                        <td><a href="https://github.com/festion/home-assistant-config/actions/runs/16347886931" class="workflow-link" target="_blank">View</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -213,7 +259,7 @@
     </div>
 
     <footer>
-        <p>Dashboard auto-refreshes every 5 minutes | Last updated: <span id="lastUpdated">Never</span></p>
+        <p>Dashboard auto-refreshes every 5 minutes | Last updated: <span id="lastUpdated">7/17/2025, 1:48:35 PM</span></p>
     </footer>
 
     <script>
@@ -267,13 +313,13 @@
 
             updateStats() {
                 const totalDeployments = this.deployments.length;
-                const successfulDeployments = this.deployments.filter(d => d.status === 'success').length;
+                const successfulDeployments = this.deployments.filter(d => d && d.status === 'success').length;
                 const successRate = totalDeployments > 0 ? Math.round((successfulDeployments / totalDeployments) * 100) : 0;
                 
-                const uniqueDeployers = new Set(this.deployments.map(d => d.user)).size;
+                const uniqueDeployers = new Set(this.deployments.filter(d => d && d.user).map(d => d.user)).size;
                 
-                const lastDeployment = this.deployments.length > 0 ? 
-                    this.formatTimeAgo(new Date(this.deployments[0].timestamp)) : 'Never';
+                const lastDeployment = this.deployments.length > 0 && this.deployments[0] ? 
+                    this.formatTimeAgo(this.deployments[0].date) : 'Never';
 
                 document.getElementById('totalDeployments').textContent = totalDeployments;
                 document.getElementById('successRate').textContent = `${successRate}%`;
@@ -293,25 +339,33 @@
                 
                 tableBody.innerHTML = recentDeployments.map(deployment => `
                     <tr>
-                        <td>${this.formatDate(deployment.timestamp)}</td>
+                        <td>${this.formatDate(deployment.date)}</td>
                         <td><span class="status-badge status-${deployment.status}">${deployment.status}</span></td>
-                        <td><code class="commit-hash">${deployment.commit.substring(0, 7)}</code></td>
-                        <td>${deployment.user}</td>
-                        <td><a href="${deployment.workflow_url}" class="workflow-link" target="_blank">View</a></td>
+                        <td><code class="commit-hash">${deployment.commit ? deployment.commit.substring(0, 7) : 'Unknown'}</code></td>
+                        <td>${deployment.user || 'Unknown'}</td>
+                        <td><a href="${deployment.workflow_url || '#'}" class="workflow-link" target="_blank">View</a></td>
                     </tr>
                 `).join('');
             }
 
             formatDate(timestamp) {
+                if (!timestamp) return 'Unknown';
                 const date = new Date(timestamp);
+                if (isNaN(date.getTime())) return 'Invalid Date';
                 return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
             }
 
             formatTimeAgo(date) {
-                const now = new Date();
-                const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+                if (!date) return 'Unknown';
+                const parsedDate = new Date(date);
+                if (isNaN(parsedDate.getTime())) return 'Invalid Date';
                 
-                if (diffInHours < 1) {
+                const now = new Date();
+                const diffInHours = Math.floor((now - parsedDate) / (1000 * 60 * 60));
+                
+                if (diffInHours < 0) {
+                    return 'Just now';
+                } else if (diffInHours < 1) {
                     return 'Less than an hour ago';
                 } else if (diffInHours < 24) {
                     return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
