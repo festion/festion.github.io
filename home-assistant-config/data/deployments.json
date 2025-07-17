@@ -1,14 +1,74 @@
 {
   "deployments": [
     {
-      "run_id": "example-run-1",
-      "timestamp": "2025-07-14T18:30:00Z",
+      "id": 16348166493,
+      "date": "2025-07-17T14:39:41Z",
       "status": "success",
-      "commit": "e8b2707023896206561220af91821ed1533c89c2",
+      "commit": "8c032e2",
       "user": "festion",
-      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/example-run-1",
-      "message": "Fix appliance notification duplicates"
+      "workflow": "Update Deployment Dashboard",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/16348166493"
+    },
+    {
+      "id": 16348136523,
+      "date": "2025-07-17T14:38:26Z",
+      "status": "failure",
+      "commit": "8c032e2",
+      "user": "festion",
+      "workflow": "Deploy to Production",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/16348136523"
+    },
+    {
+      "id": 16348099336,
+      "date": "2025-07-17T14:36:51Z",
+      "status": "success",
+      "commit": "8c032e2",
+      "user": "festion",
+      "workflow": "YAML Lint & Home Assistant Validation",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/16348099336"
+    },
+    {
+      "id": 16347926280,
+      "date": "2025-07-17T14:29:32Z",
+      "status": "success",
+      "commit": "7d1870f",
+      "user": "festion",
+      "workflow": "Deploy to Production",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/16347926280"
+    },
+    {
+      "id": 16347915030,
+      "date": "2025-07-17T14:29:03Z",
+      "status": "success",
+      "commit": "7d1870f",
+      "user": "festion",
+      "workflow": "Update Deployment Dashboard",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/16347915030"
+    },
+    {
+      "id": 16347890198,
+      "date": "2025-07-17T14:28:04Z",
+      "status": "success",
+      "commit": "7d1870f",
+      "user": "festion",
+      "workflow": "YAML Lint & Home Assistant Validation",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/16347890198"
+    },
+    {
+      "id": 16347886931,
+      "date": "2025-07-17T14:27:55Z",
+      "status": "success",
+      "commit": "bf6c60b",
+      "user": "festion",
+      "workflow": "Deploy to Production",
+      "workflow_url": "https://github.com/festion/home-assistant-config/actions/runs/16347886931"
     }
   ],
-  "last_updated": "2025-07-14T18:30:00Z"
+  "summary": {
+    "total_deployments": 7,
+    "success_rate": 85.7,
+    "last_deployment": "2025-07-17T14:39:41Z",
+    "active_deployers": 1
+  },
+  "last_updated": "2025-07-17T15:05:00Z"
 }
